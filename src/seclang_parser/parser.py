@@ -6,17 +6,20 @@ from .SecLangParser import SecLangParser
 from .errors import LexerErrorListener, ParserErrorListener
 
 
+def parse_file_with_implementation(s: str, impl: SecLangParserListener) -> list:
+    p = _prepare_parser(s)
+    tree = p.configuration()
+    walker = ParseTreeWalker()
+    walker.walk(impl, tree)
+
 def parse_file(s: str) -> list:
     parser = _prepare_parser(s)
 
     # invoke the parser on rule "r"
     tree = parser.configuration()
     walker = ParseTreeWalker()
-    listener = SecLangParserListenerImpl()
+    listener = DefaultParserImpl()
     walker.walk(listener, tree)
-
-    print(listener.ids)
-
 
 def _prepare_parser(s):
     stream = InputStream(s)
@@ -31,7 +34,7 @@ def _prepare_parser(s):
     return parser
 
 
-class SecLangParserListenerImpl(SecLangParserListener):
+class DefaultParserImpl(SecLangParserListener):
     def __init__(self):
         self.comments = []
         self.ids = []
