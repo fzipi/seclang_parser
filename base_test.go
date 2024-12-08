@@ -10,7 +10,7 @@ import (
 	"github.com/antlr4-go/antlr/v4"
 	"github.com/stretchr/testify/require"
 
-	"github.com/coreruleset/seclang_parser/parsing"
+	"github.com/coreruleset/seclang_parser/parser"
 )
 
 type TreeShapeListener struct {
