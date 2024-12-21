@@ -34,7 +34,7 @@ cd parser
 ./generate.sh
 cd ..
 poetry install
-poetry run python ./base_test.py
+poetry run parser -f testdata/crs-setup.conf
 ```
 
 ## Authors

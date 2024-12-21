@@ -4,14 +4,32 @@ version = "0.1.0"
 description = "SecLang Parser using ANTLR"
 authors = ["Felipe Zipitria <felipe.zipitria@owasp.org>"]
 readme = "README.md"
+license = "Apache-2.0"
 
+keywords = ["seclang", "antlr4", "parser"]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+packages = [
+    { include = "seclang_parser", from = "src" }
+]
+
+[tool.poetry.scripts]
+parser = 'seclang_parser.cli:run'
+
+# Requirements
 [tool.poetry.dependencies]
 python = "^3.9"
 antlr4-python3-runtime = "^4.13.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.4.4"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.poetry.scripts]
-parser = 'base_test:main'
