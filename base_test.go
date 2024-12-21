@@ -253,7 +253,7 @@ var genericTests = map[string]struct {
 		"",
 	},
 	"testdata/test_directive_unknown.conf": {
-		4,
+		1,
 		"test should fail with unknown directive",
 	},
 	"testdata/test_34_xml.conf": {

@@ -19,7 +19,7 @@ limitations under the License.
 lexer grammar SecLangLexer;
 
 tokens {
-	QUOTE, SINGLE_QUOTE, EQUAL, COLON, EQUALS_PLUS, EQUALS_MINUS, COMMA, PIPE
+	QUOTE, SINGLE_QUOTE, EQUAL, COLON, EQUALS_PLUS, EQUALS_MINUS, COMMA, PIPE, CONFIG_VALUE_PATH
 }
 
 WS
@@ -1198,8 +1198,22 @@ WS_FILE_PATH_MODE
 	: WS -> skip
 	;
 
-CONFIG_VALUE_PATH
-	: ('/' | LETTER | DIGIT | '.' | '_' | '~' | '|' | '\\' | ':' | '-')+ -> popMode
+FILE_PATH_QUOTE
+	: '"' -> type(QUOTE), pushMode(QUOTED_FILE_PATH)
+	;
+
+CONFIG_VALUE_PATH_DEFAULT
+	: ('/' | LETTER | DIGIT | '.' | '_' | '~' | '|' | '\\' | ':' | '-')+ -> type(CONFIG_VALUE_PATH), popMode
+	;
+
+mode QUOTED_FILE_PATH;
+
+CONFIG_VALUE_PATH_DEFAULT_QUOTED
+	: CONFIG_VALUE_PATH_DEFAULT -> type(CONFIG_VALUE_PATH)
+	;
+
+FILE_PATH_CLOSE_QUOTE
+	: '"' -> type(QUOTE), pushMode(DEFAULT_MODE)
 	;
 
 mode XPATH;

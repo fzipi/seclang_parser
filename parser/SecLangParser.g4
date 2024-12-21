@@ -44,7 +44,8 @@ rules_directive:
     ;
 
 engine_config_directive:
-    stmt_audit_log
+    stmt_audit_log values
+    | stmt_audit_log QUOTE values QUOTE
     | engine_config_action_directive actions
     | string_engine_config_directive QUOTE values QUOTE
     | sec_marker_directive QUOTE values QUOTE
@@ -196,6 +197,7 @@ values:
     | CONFIG_VALUE_DETC
     | CONFIG_VALUE_PROCESS_PARTIAL
     | CONFIG_VALUE_REJECT
+    | CONFIG_VALUE_PATH INT
     | CONFIG_VALUE_PATH
     | STRING
     | VARIABLE_NAME
